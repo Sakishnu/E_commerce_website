@@ -193,6 +193,31 @@ export const Navbar: React.FC = () => {
     setShowAbout((prev) => !prev)
   }
 
+  // User Account dropdown state & refs
+  const [showUserMenu, setShowUserMenu] = useState(false)
+  const userDropdownRef = useRef<HTMLDivElement>(null)
+  const userTriggerRef = useRef<HTMLButtonElement>(null)
+  const userTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleOpenUserMenu = () => {
+    if (userTimeoutRef.current) clearTimeout(userTimeoutRef.current)
+    setShowUserMenu(true)
+  }
+
+  const handleCloseUserMenu = () => {
+    if (userTimeoutRef.current) clearTimeout(userTimeoutRef.current)
+    userTimeoutRef.current = setTimeout(() => {
+      setShowUserMenu(false)
+    }, 250)
+  }
+
+  const handleToggleUserMenu = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (userTimeoutRef.current) clearTimeout(userTimeoutRef.current)
+    setShowUserMenu((prev) => !prev)
+  }
+
   // Mobile Accordion Drawer states
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false)
   const [mobileDealsOpen, setMobileDealsOpen] = useState(false)
@@ -223,6 +248,13 @@ export const Navbar: React.FC = () => {
       ) {
         setShowAbout(false)
       }
+      // User menu outside click
+      if (
+        userDropdownRef.current && !userDropdownRef.current.contains(target) &&
+        userTriggerRef.current && !userTriggerRef.current.contains(target)
+      ) {
+        setShowUserMenu(false)
+      }
     }
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
@@ -230,6 +262,7 @@ export const Navbar: React.FC = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
       if (dealsTimeoutRef.current) clearTimeout(dealsTimeoutRef.current)
       if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current)
+      if (userTimeoutRef.current) clearTimeout(userTimeoutRef.current)
     }
   }, [])
 
@@ -244,14 +277,14 @@ export const Navbar: React.FC = () => {
   ]
 
   const aboutMenuItems = [
-    { name: "About Us", desc: "Who we are and what we build", hash: "#about-us", path: "/about", icon: <Users className="h-4.5 w-4.5 text-primary shrink-0" /> },
-    { name: "Our Story", desc: "How Nexus was founded", hash: "#story", path: "/about", icon: <BookOpen className="h-4.5 w-4.5 text-blue-500 shrink-0" /> },
-    { name: "Mission & Vision", desc: "What drives our curation", hash: "#mission", path: "/about", icon: <Compass className="h-4.5 w-4.5 text-emerald-500 shrink-0" /> },
-    { name: "Why Choose Us", desc: "Our core quality pillars", hash: "#why-choose-us", path: "/about", icon: <Award className="h-4.5 w-4.5 text-amber-500 shrink-0" /> },
-    { name: "Contact Us", desc: "Get in touch with support", hash: "#contact", path: "/about", icon: <Phone className="h-4.5 w-4.5 text-rose-500 shrink-0" /> },
-    { name: "FAQ", desc: "Frequently asked questions", path: "/faq", icon: <Sparkles className="h-4.5 w-4.5 text-violet-500 shrink-0" /> },
-    { name: "Privacy Policy", desc: "Confidentiality parameters", hash: "#privacy", path: "/about", icon: <ShieldCheck className="h-4.5 w-4.5 text-teal-500 shrink-0" /> },
-    { name: "Terms & Conditions", desc: "Usage agreement standards", hash: "#terms", path: "/about", icon: <FileText className="h-4.5 w-4.5 text-zinc-500 shrink-0" /> },
+    { name: "Corporate Profile", desc: "Identity, culture, and high-impact offerings", hash: "#about-us", path: "/about", icon: <Users className="h-4.5 w-4.5 text-primary shrink-0" /> },
+    { name: "Our History", desc: "Tracing our origin and growth journey", hash: "#story", path: "/about", icon: <BookOpen className="h-4.5 w-4.5 text-blue-500 shrink-0" /> },
+    { name: "Core Principles", desc: "Empowering daily life through curation", hash: "#mission", path: "/about", icon: <Compass className="h-4.5 w-4.5 text-emerald-500 shrink-0" /> },
+    { name: "Our Advantage", desc: "Uncompromising quality & verified standards", hash: "#why-choose-us", path: "/about", icon: <Award className="h-4.5 w-4.5 text-amber-500 shrink-0" /> },
+    { name: "Get In Touch", desc: "Connect directly with global assistance", path: "/contact", icon: <Phone className="h-4.5 w-4.5 text-rose-500 shrink-0" /> },
+    { name: "Help Center", desc: "Instant clarity on common inquiries", path: "/faq", icon: <Sparkles className="h-4.5 w-4.5 text-violet-500 shrink-0" /> },
+    { name: "Data Protection", desc: "Robust safeguards ensuring confidentiality", hash: "#privacy", path: "/about", icon: <ShieldCheck className="h-4.5 w-4.5 text-teal-500 shrink-0" /> },
+    { name: "Service Terms", desc: "Clear governing guidelines & standards", hash: "#terms", path: "/about", icon: <FileText className="h-4.5 w-4.5 text-zinc-500 shrink-0" /> },
   ]
 
   const categories = [
@@ -567,10 +600,14 @@ export const Navbar: React.FC = () => {
 
           {/* User Account / Profile */}
           {isAuthenticated ? (
-            <div className="relative group flex items-center">
-              <Link
-                to="/dashboard"
-                className="flex items-center justify-center gap-2 h-11 px-3 rounded-lg border hover:bg-muted/50 transition-colors"
+            <div className="relative flex items-center">
+              <button
+                ref={userTriggerRef}
+                onClick={handleToggleUserMenu}
+                onMouseEnter={handleOpenUserMenu}
+                onMouseLeave={handleCloseUserMenu}
+                className="flex items-center justify-center gap-2 h-11 px-3 rounded-lg border hover:bg-muted/50 transition-colors focus:outline-none"
+                aria-label="User Account Menu"
               >
                 {user?.profilePic ? (
                   <img src={user.profilePic} alt={user.name} className="h-6 w-6 rounded-full object-cover shrink-0" />
@@ -578,20 +615,35 @@ export const Navbar: React.FC = () => {
                   <User className="h-4 w-4" />
                 )}
                 <span className="hidden lg:inline text-xs font-semibold">{user?.name}</span>
-              </Link>
+                <ChevronDown className={cn("h-3 w-3 transition-transform duration-200", showUserMenu && "rotate-180")} />
+              </button>
 
               {/* Account Dropdown Menu */}
-              <div className="absolute right-0 top-full mt-2 w-48 rounded-xl border bg-background bg-white dark:bg-zinc-950 p-2 shadow-xl hidden group-hover:block hover:block animate-in fade-in-50 duration-75">
-                <Link to="/dashboard" className="block text-xs font-semibold px-4 py-2 text-foreground/80 hover:bg-muted rounded-md transition-colors">Dashboard</Link>
-                <Link to="/dashboard/profile" className="block text-xs font-semibold px-4 py-2 text-foreground/80 hover:bg-muted rounded-md transition-colors">User Profile</Link>
-                <Link to="/dashboard/orders" className="block text-xs font-semibold px-4 py-2 text-foreground/80 hover:bg-muted rounded-md transition-colors">My Orders</Link>
-                <button
-                  onClick={logout}
-                  className="w-full text-left text-xs font-semibold px-4 py-2 text-red-500 hover:bg-red-500/10 rounded-md transition-colors"
+              {showUserMenu && (
+                <div
+                  ref={userDropdownRef}
+                  onMouseEnter={handleOpenUserMenu}
+                  onMouseLeave={handleCloseUserMenu}
+                  className="absolute right-0 top-full mt-2 w-44 rounded-xl border bg-background bg-white dark:bg-zinc-950 p-1.5 shadow-xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 space-y-1"
                 >
-                  Logout
-                </button>
-              </div>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setShowUserMenu(false)}
+                    className="block text-xs font-bold px-4 py-2 text-foreground/80 hover:bg-muted rounded-lg transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false)
+                      logout()
+                    }}
+                    className="w-full flex items-center justify-start text-xs font-bold px-4 py-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <Link

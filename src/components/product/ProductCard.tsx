@@ -67,6 +67,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
             alt={product.name}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
+            onError={(e) => {
+              // Fallback image if Unsplash URL fails to load
+              e.currentTarget.src = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&h=600&q=80"
+            }}
           />
         </Link>
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import { 
   ShieldCheck, 
   Users, 
@@ -20,14 +21,16 @@ import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 
 export const AboutUsPage: React.FC = () => {
+  const location = useLocation()
   const [privacyExpanded, setPrivacyExpanded] = useState(false)
   const [termsExpanded, setTermsExpanded] = useState(false)
 
   // Smooth scroll to anchor hash & auto-expand policy sections if targeted
   useEffect(() => {
     const handleHashScroll = () => {
-      if (window.location.hash) {
-        const id = window.location.hash.substring(1)
+      const hash = location.hash || window.location.hash
+      if (hash) {
+        const id = hash.substring(1)
         
         // Auto-expand if the hash matches the policy sections
         if (id === "privacy") {
@@ -36,21 +39,20 @@ export const AboutUsPage: React.FC = () => {
           setTermsExpanded(true)
         }
 
-        const element = document.getElementById(id)
-        if (element) {
-          const timer = setTimeout(() => {
+        const timer = setTimeout(() => {
+          const element = document.getElementById(id)
+          if (element) {
             element.scrollIntoView({ behavior: "smooth", block: "start" })
-          }, 200)
-          return () => clearTimeout(timer)
-        }
+          }
+        }, 150)
+        return () => clearTimeout(timer)
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" })
       }
     }
 
     handleHashScroll()
-    // Listen to hashchange events for in-page anchors
-    window.addEventListener("hashchange", handleHashScroll)
-    return () => window.removeEventListener("hashchange", handleHashScroll)
-  }, [])
+  }, [location.pathname, location.hash])
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
@@ -69,9 +71,9 @@ export const AboutUsPage: React.FC = () => {
             <Compass className="h-3.5 w-3.5 fill-current" />
             NEXUS DIRECTIVE
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white drop-shadow">Redefining Premium Retail</h1>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white drop-shadow">Corporate Profile</h1>
           <p className="text-xs sm:text-base text-zinc-200 leading-relaxed font-medium drop-shadow-sm">
-            Nexus is a state-of-the-art e-commerce gateway built to curate high-performance tech accessories, lifestyle apparel, and luxury home workspace components.
+            Discover our identity, culture, and high-impact product offerings. We construct modern interfaces for modern living.
           </p>
         </div>
       </section>
@@ -79,12 +81,12 @@ export const AboutUsPage: React.FC = () => {
       {/* Brand Story & Philosophy */}
       <section id="story" className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16 scroll-mt-24">
         <div className="space-y-5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-          <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">Our Story</h2>
+          <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">Our History</h2>
           <p>
-            Founded in late 2024, Nexus represents a strategic response to the excessive noise of the digital marketplace. We set out to build a highly refined catalog aggregator that eliminates the standard compromise between form and utility. 
+            Tracing the origin and growth journey of our platform. What began as a localized supply circle for custom mechanical workstation setups has matured into a global catalog offering premium consumer electronics, fitness instruments, and tailored accessories.
           </p>
           <p>
-            What began as a localized supply circle for custom mechanical workstation setups has matured into a global catalog offering premium consumer electronics, fitness instruments, and tailored accessories. We believe every product you interact with daily should offer an elevated premium experience.
+            Nexus represents a strategic response to the excessive noise of the digital marketplace. We set out to build a highly refined catalog aggregator that eliminates the standard compromise between form and utility.
           </p>
           <div className="border-l-4 border-primary pl-4 py-2 italic bg-muted/40 rounded-r-xl">
             "Nexus does not just deliver retail packages; we curate interfaces for modern, aesthetics-focused living."
@@ -105,18 +107,18 @@ export const AboutUsPage: React.FC = () => {
           <div className="p-3 bg-primary/10 text-primary rounded-xl w-fit">
             <Compass className="h-6 w-6" />
           </div>
-          <h3 className="text-lg font-extrabold text-foreground tracking-tight">Our Mission</h3>
+          <h3 className="text-lg font-extrabold text-foreground tracking-tight">Core Principles</h3>
           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            To empower developers, designers, and creators with clean-line workspace utilities and daily apparel that enhance focus and productivity. We aim to establish a zero-friction shopping destination powered by hyper-efficient delivery pipelines.
+            Empowering daily life through thoughtful, high-standard curation. To empower developers, designers, and creators with clean-line workspace utilities and daily apparel that enhance focus and productivity.
           </p>
         </div>
         <div className="space-y-3.5 border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-8">
           <div className="p-3 bg-primary/10 text-primary rounded-xl w-fit">
             <Eye className="h-6 w-6" />
           </div>
-          <h3 className="text-lg font-extrabold text-foreground tracking-tight">Our Vision</h3>
+          <h3 className="text-lg font-extrabold text-foreground tracking-tight">Forward Vision</h3>
           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            To become the benchmark aesthetic standard for modern lifestyle items globally. We envision an ecosystem where sustainable production practices meet advanced composite materials, ensuring each purchase remains durable and stylish for years.
+            To become the benchmark aesthetic standard for modern lifestyle items globally. We envision an ecosystem where sustainable production practices meet advanced composite materials.
           </p>
         </div>
       </section>
@@ -124,32 +126,32 @@ export const AboutUsPage: React.FC = () => {
       {/* Why Choose Us & Customer Commitment */}
       <section id="why-choose-us" className="mb-16 space-y-8 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">Why Choose Us</h2>
-          <p className="text-xs text-muted-foreground">We focus on architectural quality, functional design, and reliable service.</p>
+          <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">Our Advantage</h2>
+          <p className="text-xs text-muted-foreground">Uncompromising quality, customer-first service, and verified standards.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="border p-6 rounded-2xl bg-card shadow-sm space-y-4 hover:border-primary/45 transition-colors">
             <Award className="h-8 w-8 text-primary" />
-            <h3 className="text-sm font-bold text-foreground">Uncompromising Quality</h3>
+            <h3 className="text-sm font-bold text-foreground">Verified Quality Standards</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              We vet every partner and test structural resilience. From full-grain cowhide leather casings to dense eco-TPE exercise accessories and aircraft-grade aluminum brackets, quality is absolute.
+              We vet every partner and test structural resilience. Quality control parameters ensure absolute confidence across all product categories.
             </p>
           </div>
 
           <div className="border p-6 rounded-2xl bg-card shadow-sm space-y-4 hover:border-primary/45 transition-colors">
             <Sparkles className="h-8 w-8 text-primary" />
-            <h3 className="text-sm font-bold text-foreground">Minimalist Design Philosophy</h3>
+            <h3 className="text-sm font-bold text-foreground">Aesthetic & Functional Harmony</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              We reject visual clutter. Every product page, item specification, and shipping container features sleek curves, clean neutral colors, and structural utility tailored to complement modern environments.
+              Every item features clean lines and functional utility tailored to seamlessly integrate into modern workspaces and homes.
             </p>
           </div>
 
-          <div className="border p-6 rounded-2xl bg-card shadow-sm space-y-4 hover:border-primary/45 transition-colors">
+          <div className="border-card p-6 border rounded-2xl bg-card shadow-sm space-y-4 hover:border-primary/45 transition-colors">
             <HeartHandshake className="h-8 w-8 text-primary" />
-            <h3 className="text-sm font-bold text-foreground">Customer Commitment</h3>
+            <h3 className="text-sm font-bold text-foreground">Customer-First Service</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Your fulfillment is our target. We provide 24/7 client care channels, express logistics partnerships, 30-day trial options, and a transparent return policy to ensure your purchases are completely risk-free.
+              Your fulfillment is our target. We provide dedicated support channels, express logistics, and transparent return policies.
             </p>
           </div>
         </div>
@@ -318,7 +320,7 @@ export const AboutUsPage: React.FC = () => {
       {/* Collapsible Policy Sections */}
       <section className="border-t pt-10 space-y-6">
         
-        {/* Privacy Policy */}
+        {/* Data Protection */}
         <div id="privacy" className="border rounded-2xl bg-card overflow-hidden shadow-sm scroll-mt-24">
           <button 
             onClick={() => setPrivacyExpanded(!privacyExpanded)}
@@ -326,7 +328,10 @@ export const AboutUsPage: React.FC = () => {
           >
             <div className="flex items-center gap-2.5">
               <FileText className="h-5 w-5 text-primary" />
-              <span className="text-sm font-extrabold text-foreground tracking-tight">Privacy Policy</span>
+              <div>
+                <span className="text-sm font-extrabold text-foreground tracking-tight block">Data Protection</span>
+                <span className="text-[11px] text-muted-foreground font-normal">Robust safeguards ensuring confidentiality</span>
+              </div>
             </div>
             {privacyExpanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
           </button>
@@ -349,7 +354,7 @@ export const AboutUsPage: React.FC = () => {
           )}
         </div>
 
-        {/* Terms & Conditions */}
+        {/* Service Terms */}
         <div id="terms" className="border rounded-2xl bg-card overflow-hidden shadow-sm scroll-mt-24">
           <button 
             onClick={() => setTermsExpanded(!termsExpanded)}
@@ -357,7 +362,10 @@ export const AboutUsPage: React.FC = () => {
           >
             <div className="flex items-center gap-2.5">
               <FileText className="h-5 w-5 text-primary" />
-              <span className="text-sm font-extrabold text-foreground tracking-tight">Terms & Conditions</span>
+              <div>
+                <span className="text-sm font-extrabold text-foreground tracking-tight block">Service Terms</span>
+                <span className="text-[11px] text-muted-foreground font-normal">Clear governing guidelines & standards</span>
+              </div>
             </div>
             {termsExpanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
           </button>

@@ -313,172 +313,31 @@ const SUBCATEGORY_TEMPLATES: Record<string, {
   }
 }
 
-// Pre-selected high-quality Unsplash image URLs indexed by keywords
-const keywordImages: Record<string, string[]> = {
-  smartphone: [
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1565849906461-0e440904a216?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1573148195900-7845dcb9b127?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  laptop: [
-    "https://images.unsplash.com/photo-1496181130204-7552cc145cd5?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  charger: [
-    "https://images.unsplash.com/photo-1622445262465-2481c4574875?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1615813951163-f40f0c4f3d2e?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  smartdevice: [
-    "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  "men-clothing": [
-    "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  "women-clothing": [
-    "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  "kids-clothing": [
-    "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  shoes: [
-    "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  furniture: [
-    "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  decor: [
-    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  kitchen: [
-    "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  lamp: [
-    "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  gym: [
-    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  sports: [
-    "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  hiking: [
-    "https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1533240332313-0db49b439ad3?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  fitness: [
-    "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  skincare: [
-    "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  haircare: [
-    "https://images.unsplash.com/photo-1527799851257-3593d843806e?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  makeup: [
-    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  grooming: [
-    "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  book: [
-    "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  notebook: [
-    "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  "desk-organizer": [
-    "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  stationery: [
-    "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  "educational-toy": [
-    "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  boardgame: [
-    "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  toy: [
-    "https://images.unsplash.com/photo-1559251606-c623743a6d76?auto=format&fit=crop&w=600&h=600&q=80",
-    "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  puzzle: [
-    "https://images.unsplash.com/photo-1585250004683-154a37651c5e?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  caraccessories: [
-    "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  bicycle: [
-    "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  helmet: [
-    "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  carwash: [
-    "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  "fitness-gear": [
-    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  yoga: [
-    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  healthdevice: [
-    "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&h=600&q=80"
-  ],
-  supplement: [
-    "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=600&h=600&q=80"
-  ]
-}
+// Pre-curated high quality photo IDs from Unsplash for realistic, unique imagery
+const UNIQUE_UNSPLASH_IDS = [
+  "1511707171634-5f897ff02aa9", "1598327105666-5b89351aff97", "1580910051074-3eb694886505", "1565849906461-0e440904a216", "1573148195900-7845dcb9b127",
+  "1496181130204-7552cc145cd5", "1531297484001-80022131f5a1", "1603302576837-37561b2e2302", "1588872657578-7efd1f1555ed", "1541807084-5c52b6b3adef",
+  "1622445262465-2481c4574875", "1583863788434-e58a36330cf0", "1615813951163-f40f0c4f3d2e", "1558002038-1055907df827", "1560169897-fc0cdbdfa4d5",
+  "1507679799987-c73779587ccf", "1617137968427-85924c800a22", "1534030347209-467a5b0ad3e6", "1519085360753-af0119f7cbe7", "1503342217505-b0a15ec3261c",
+  "1572804013309-59a88b7e92f1", "1490481651871-ab68de25d43d", "1595777457583-95e059d581b8", "1509631179647-0177331693ae", "1544005313-94ddf0286df2",
+  "1519457431-44ccd64a579b", "1566492031773-4f4e44671857", "1503919545889-aef636e10ad4", "1549298916-b41d501d3772", "1595950653106-6c9ebd614d3a",
+  "1606107557195-0e29a4b5b4aa", "1539185441755-769473a23570", "1600185365483-26d7a4cc7519", "1555041469-a586c61ea9bc", "1586023492125-27b2c045efd7",
+  "1524758631624-e2822e304c36", "1505691938895-1758d7feb511", "1513519245088-0e12902e5a38", "1534349762230-e0cadf78f5da", "1583847268964-b28dc8f51f92",
+  "1556911220-e15b29be8c8f", "1584269600464-37b1b58a9fe7", "1590794056226-79ef3a8147e1", "1507473885765-e6ed057f782c", "1534224039826-c7a0dea0e66a",
+  "1513506003901-1e6a229e2d15", "1517838277536-f5f99be501cd", "1584735935682-2f2b69dff9d2", "1571019613454-1cb2f99b2d8b", "1461896836934-ffe607ba8211",
+  "1508098682722-e99c43a406b2", "1517649763962-0c623066013b", "1522163182402-834f871fd851", "1501555088652-021faa106b9b", "1533240332313-0db49b439ad3",
+  "1476480862126-209bfaa8edc8", "1518481612222-68bbe828ecd1", "1556228720-195a672e8a03", "1608248597279-f99d160bfcbc", "1527799851257-3593d843806e",
+  "1537368910025-700350fe46c7", "1522335789203-aabd1fc54bc9", "1596462502278-27bfdc403348", "1503951914875-452162b0f3f1", "1621607512214-68297480165e",
+  "1544947950-fa07a98d237f", "1512820790803-83ca734da794", "1497633762265-9d179a990aa6", "1531346878377-a5be20888e57", "1517842645767-c639042777db",
+  "1585776245991-cf89dd7fc73a", "1456513080510-7bf3a84b82f8", "1587654780291-39c9404d746b", "1485546246426-74dc88dec4d9", "1610890716171-6b1bb98ffd09",
+  "1559251606-c623743a6d76", "1596461404969-9ae70f2830c1", "1585250004683-154a37651c5e", "1486006920555-c77dce18193b", "1485965120184-e220f721d03e",
+  "1599819811279-d5ad9cccf838", "1607860108855-64acf2078ed9", "1544367567-0f2fcb009e0b", "1584515979956-d9f6e5d09982", "1584017911766-d451b3d0e843"
+]
 
 // Generate the full database of products
 const generateProducts = (): Product[] => {
   const generated: Product[] = [...MOCK_BASE_PRODUCTS]
-  let prodCounter = 13
+  let prodCounter = 0
   
   // Find which template maps to which main category
   const subcategoryToCategoryMap: Record<string, string> = {
@@ -529,14 +388,10 @@ const generateProducts = (): Product[] => {
     "nutrition-products": "health-wellness"
   }
 
-  // Iterate over each subcategory template and create 5 realistic items
+  // Iterate over each subcategory template and create 5 realistic items with unique image per item
   Object.entries(SUBCATEGORY_TEMPLATES).forEach(([subSlug, template]) => {
     const mainCategory = subcategoryToCategoryMap[subSlug]
     if (!mainCategory) return
-    
-    const imagesList = keywordImages[template.imageKeyword] || [
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&h=600&q=80"
-    ]
 
     template.names.forEach((pName, index) => {
       const price = parseFloat(
@@ -552,7 +407,10 @@ const generateProducts = (): Product[] => {
       const isFeatured = index === 0 && Math.random() < 0.5
       const isTrending = index === 1 && Math.random() < 0.5
       
-      const img = imagesList[index % imagesList.length]
+      // Select unique image for every single product
+      const photoId = UNIQUE_UNSPLASH_IDS[prodCounter % UNIQUE_UNSPLASH_IDS.length]
+      prodCounter++
+      const img = `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=600&h=600&q=80`
 
       generated.push({
         id: `gen-${subSlug}-${index + 1}`,
@@ -564,8 +422,8 @@ const generateProducts = (): Product[] => {
         images: [img],
         rating,
         reviewsCount,
-        category: mainCategory, // e.g. "electronics"
-        subcategory: subSlug, // e.g. "smartphones"
+        category: mainCategory,
+        subcategory: subSlug,
         stock,
         tags: [...template.tags, subSlug],
         isFeatured,

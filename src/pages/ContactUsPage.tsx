@@ -33,12 +33,12 @@ export const ContactUsPage: React.FC = () => {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
       <BackButton className="mb-4" defaultPath="/" />
       
-      <Breadcrumbs items={[{ label: "Contact Us" }]} />
+      <Breadcrumbs items={[{ label: "Get In Touch" }]} />
 
       <div className="border-b pb-4 mb-8">
-        <h1 className="text-xl sm:text-2xl font-black text-foreground">Contact Us</h1>
+        <h1 className="text-xl sm:text-2xl font-black text-foreground">Get In Touch</h1>
         <p className="text-xs text-muted-foreground mt-0.5">
-          Have queries about orders or specifications? Reach out to us below.
+          Connect directly with global assistance. Have queries about orders or specifications? Reach out below.
         </p>
       </div>
 

@@ -9,12 +9,12 @@ export const FAQPage: React.FC = () => {
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-16">
       <BackButton className="mb-4" defaultPath="/" />
       
-      <Breadcrumbs items={[{ label: "FAQs" }]} />
+      <Breadcrumbs items={[{ label: "Help Center" }]} />
 
       <div className="border-b pb-4 mb-8">
-        <h1 className="text-xl sm:text-2xl font-black text-foreground">Frequently Asked Questions</h1>
+        <h1 className="text-xl sm:text-2xl font-black text-foreground">Help Center</h1>
         <p className="text-xs text-muted-foreground mt-0.5">
-          Find answers to shipping, payment queries, return policies, and warranties.
+          Instant clarity on common inquiries, shipping, payments, returns, and warranties.
         </p>
       </div>
 
