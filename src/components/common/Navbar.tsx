@@ -32,7 +32,8 @@ import {
   ShieldCheck,
   Phone,
   FileText,
-  Award
+  Award,
+  MoreVertical
 } from "lucide-react"
 import { useCartStore } from "../../store/cartStore"
 import { useWishlistStore } from "../../store/wishlistStore"
@@ -218,10 +219,38 @@ export const Navbar: React.FC = () => {
     setShowUserMenu((prev) => !prev)
   }
 
+  // Mobile User Menu state & refs
+  const [showMobileUserMenu, setShowMobileUserMenu] = useState(false)
+  const mobileUserDropdownRef = useRef<HTMLDivElement>(null)
+  const mobileUserTriggerRef = useRef<HTMLButtonElement>(null)
+
+  const handleToggleMobileUserMenu = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowMobileUserMenu((prev) => !prev)
+  }
+
   // Mobile Accordion Drawer states
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false)
   const [mobileDealsOpen, setMobileDealsOpen] = useState(false)
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
+
+  const handleMobileNavClick = (section: "categories" | "deals" | "about") => {
+    if (section === "categories") {
+      setMobileCategoriesOpen(true)
+      setMobileDealsOpen(false)
+      setMobileAboutOpen(false)
+    } else if (section === "deals") {
+      setMobileDealsOpen(true)
+      setMobileCategoriesOpen(false)
+      setMobileAboutOpen(false)
+    } else {
+      setMobileAboutOpen(true)
+      setMobileCategoriesOpen(false)
+      setMobileDealsOpen(false)
+    }
+    setMobileOpen(true)
+  }
 
   // Click outside to close mega menus, dropdowns, and suggestions
   useEffect(() => {
@@ -254,6 +283,13 @@ export const Navbar: React.FC = () => {
         userTriggerRef.current && !userTriggerRef.current.contains(target)
       ) {
         setShowUserMenu(false)
+      }
+      // Mobile user menu outside click
+      if (
+        mobileUserDropdownRef.current && !mobileUserDropdownRef.current.contains(target) &&
+        mobileUserTriggerRef.current && !mobileUserTriggerRef.current.contains(target)
+      ) {
+        setShowMobileUserMenu(false)
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
@@ -345,13 +381,13 @@ export const Navbar: React.FC = () => {
   ]
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="relative mx-auto flex h-20 max-w-[1600px] items-center justify-between gap-6 px-6 sm:px-8 lg:px-12 xl:px-16">
+      <div className="relative mx-auto flex h-16 lg:h-20 max-w-[1600px] items-center justify-between gap-2 xs:gap-3 sm:gap-4 lg:gap-6 px-3 sm:px-6 lg:px-12 xl:px-16">
         
         {/* Logo */}
         <div className="flex items-center gap-2 shrink-0">
-          <Link to="/" className="flex items-center space-x-2 text-xl font-bold tracking-tight text-foreground hover:opacity-90">
-            <ShoppingBag className="h-6 w-6 text-primary" />
-            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent font-extrabold tracking-widest">NEXUS</span>
+          <Link to="/" className="flex items-center space-x-1.5 sm:space-x-2 text-lg sm:text-xl font-bold tracking-tight text-foreground hover:opacity-90">
+            <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-primary shrink-0" />
+            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent font-extrabold tracking-widest text-base sm:text-xl">NEXUS</span>
           </Link>
         </div>
 
@@ -497,12 +533,12 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Search Bar with Suggestions */}
-        <div className="relative hidden md:flex items-center w-full max-w-[340px] xl:max-w-[440px] transition-all duration-300" ref={suggestionRef}>
+        <div className="relative flex items-center flex-1 max-w-[180px] xs:max-w-[240px] sm:max-w-[340px] xl:max-w-[440px] transition-all duration-300" ref={suggestionRef}>
           <form onSubmit={handleSearchSubmit} className="relative w-full">
             <Input
               type="search"
               placeholder="Search products..."
-              className="pr-12 h-11 w-full bg-muted/40 focus:bg-background border border-input/60 focus:border-primary/60 rounded-xl text-xs sm:text-sm tracking-wide transition-all duration-300"
+              className="pr-8 sm:pr-12 h-9 sm:h-11 w-full bg-muted/40 focus:bg-background border border-input/60 focus:border-primary/60 rounded-xl text-xs sm:text-sm tracking-wide transition-all duration-300"
               value={searchQuery}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
               onFocus={() => {
@@ -511,10 +547,10 @@ export const Navbar: React.FC = () => {
             />
             <button
               type="submit"
-              className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground h-9 w-9 flex items-center justify-center rounded-lg hover:bg-muted/50 transition-colors"
+              className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground h-7 w-7 sm:h-9 sm:w-9 flex items-center justify-center rounded-lg hover:bg-muted/50 transition-colors"
               aria-label="Search"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </button>
           </form>
 
@@ -543,8 +579,8 @@ export const Navbar: React.FC = () => {
           )}
         </div>
 
-        {/* User Navigation Actions */}
-        <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 xl:gap-6 shrink-0">
+        {/* Desktop Navigation Actions (Preserved for Large/Desktop devices) */}
+        <div className="hidden lg:flex items-center gap-3 sm:gap-4 lg:gap-5 xl:gap-6 shrink-0">
           
           {/* Theme toggler */}
           <button
@@ -655,28 +691,146 @@ export const Navbar: React.FC = () => {
             </Link>
           )}
 
-          {/* Mobile hamburger menu toggle */}
+        </div>
+
+        {/* Mobile Right Controls: 3-Dot Menu followed immediately by Email + Image at Top-Right (Matching Image 1) */}
+        <div className="flex lg:hidden items-center gap-1.5 xs:gap-2 sm:gap-3 shrink-0">
+          
+          {/* 3-Dot Menu Button (Immediately before email & image) */}
           <button
             onClick={() => setMobileOpen(true)}
-            className="h-11 w-11 flex items-center justify-center lg:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors"
-            aria-label="Open Menu"
+            className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center text-foreground/80 hover:text-foreground hover:bg-muted/70 rounded-xl border border-input/70 transition-colors shrink-0"
+            aria-label="Open 3-Dot Menu"
+            title="More Options"
           >
-            <Menu className="h-5 w-5" />
+            <MoreVertical className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
           </button>
+
+          {/* Mobile Email + Image (Top-Right Corner matching Image 1) */}
+          {isAuthenticated ? (
+            <div className="relative flex items-center">
+              <button
+                ref={mobileUserTriggerRef}
+                onClick={handleToggleMobileUserMenu}
+                className="flex items-center gap-1.5 sm:gap-2 h-9 sm:h-10 px-2 sm:px-3 rounded-full border border-input/70 hover:bg-muted/50 transition-colors focus:outline-none max-w-[130px] xs:max-w-[170px] sm:max-w-[240px]"
+                aria-label="User Account"
+              >
+                <span className="text-[11px] sm:text-xs font-medium text-foreground/90 truncate max-w-[65px] xs:max-w-[105px] sm:max-w-[170px]">
+                  {user?.email || user?.name}
+                </span>
+                {user?.profilePic ? (
+                  <img src={user.profilePic} alt={user.name} className="h-6 w-6 sm:h-7 sm:w-7 rounded-full object-cover shrink-0 ring-1 ring-border" />
+                ) : (
+                  <div className="h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-muted flex items-center justify-center shrink-0">
+                    <User className="h-3.5 w-3.5 text-muted-foreground" />
+                  </div>
+                )}
+              </button>
+
+              {/* Mobile Account Dropdown Menu */}
+              {showMobileUserMenu && (
+                <div
+                  ref={mobileUserDropdownRef}
+                  className="absolute right-0 top-full mt-2 w-52 rounded-xl border bg-background p-2 shadow-xl z-50 animate-in fade-in-50 duration-150 space-y-1"
+                >
+                  <div className="px-3 py-2 border-b">
+                    <p className="text-xs font-bold text-foreground truncate">{user?.name}</p>
+                    <p className="text-[10px] text-muted-foreground truncate">{user?.email}</p>
+                  </div>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setShowMobileUserMenu(false)}
+                    className="block text-xs font-bold px-3 py-2 text-foreground/80 hover:bg-muted rounded-lg transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/dashboard/profile"
+                    onClick={() => setShowMobileUserMenu(false)}
+                    className="block text-xs font-bold px-3 py-2 text-foreground/80 hover:bg-muted rounded-lg transition-colors"
+                  >
+                    Edit Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setShowMobileUserMenu(false)
+                      logout()
+                    }}
+                    className="w-full flex items-center justify-start text-xs font-bold px-3 py-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="flex items-center gap-1.5 h-9 sm:h-10 px-2.5 sm:px-3 rounded-full border border-input/70 hover:bg-muted/50 transition-colors text-xs font-medium text-foreground/80"
+              title="Sign In"
+            >
+              <span className="text-[11px] sm:text-xs">Sign In</span>
+              <User className="h-4 w-4" />
+            </Link>
+          )}
 
         </div>
 
       </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Sub-Navigation Row (Matching Image 2 Reference) */}
+      <div className="lg:hidden border-t bg-background/95 backdrop-blur px-3 sm:px-6">
+        <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-8 py-2 overflow-x-auto no-scrollbar text-xs sm:text-sm font-medium whitespace-nowrap text-foreground/80">
+          <Link
+            to="/"
+            className="hover:text-foreground transition-colors hover:font-semibold"
+          >
+            Home
+          </Link>
+          <Link
+            to="/shop"
+            className="hover:text-foreground transition-colors hover:font-semibold"
+          >
+            Shop
+          </Link>
+          <button
+            onClick={() => handleMobileNavClick("categories")}
+            className="flex items-center gap-1 hover:text-foreground transition-colors hover:font-semibold cursor-pointer"
+          >
+            <span>Categories</span>
+            <ChevronDown className="h-3 w-3" />
+          </button>
+          <button
+            onClick={() => handleMobileNavClick("deals")}
+            className="flex items-center gap-1 hover:text-foreground transition-colors hover:font-semibold cursor-pointer"
+          >
+            <span>Deals</span>
+            <ChevronDown className="h-3 w-3" />
+          </button>
+          <button
+            onClick={() => handleMobileNavClick("about")}
+            className="flex items-center gap-1 hover:text-foreground transition-colors hover:font-semibold cursor-pointer"
+          >
+            <span>About</span>
+            <ChevronDown className="h-3 w-3" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile 3-Dot Menu Drawer Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden bg-black/60 backdrop-blur-sm animate-in fade-in-30">
-          <div className="relative flex w-full max-w-xs flex-col h-full bg-background p-6 shadow-xl animate-in slide-in-from-right-5 duration-200 ml-auto">
-            <div className="flex items-center justify-between border-b pb-4">
-              <span className="text-sm font-bold text-foreground">Menu</span>
+          <div className="relative flex w-full max-w-sm flex-col h-full bg-background p-5 shadow-2xl animate-in slide-in-from-right-5 duration-200 ml-auto">
+            
+            {/* Header */}
+            <div className="flex items-center justify-between border-b pb-3.5">
+              <div className="flex items-center gap-2">
+                <ShoppingBag className="h-5 w-5 text-primary" />
+                <span className="text-sm font-bold text-foreground">Menu & Quick Options</span>
+              </div>
               <button
                 onClick={() => setMobileOpen(false)}
-                className="h-11 w-11 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg"
+                className="h-9 w-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors"
                 aria-label="Close Menu"
               >
                 <X className="h-5 w-5" />
@@ -684,31 +838,116 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile Search */}
-            <div className="mt-4">
-              <form onSubmit={handleSearchSubmit} className="relative w-full">
+            <div className="mt-3.5">
+              <form onSubmit={(e) => { handleSearchSubmit(e); setMobileOpen(false); }} className="relative w-full">
                 <Input
                   type="search"
                   placeholder="Search products..."
-                  className="pr-10 h-10 w-full"
+                  className="pr-10 h-10 w-full text-xs"
                   value={searchQuery}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                   <Search className="h-4 w-4" />
                 </button>
               </form>
             </div>
 
+            {/* Desktop Actions Section inside 3-Dot Menu */}
+            <div className="mt-3.5 p-3 rounded-2xl bg-muted/40 border border-border/60 space-y-2.5">
+              <span className="text-[10px] font-black uppercase tracking-wider text-muted-foreground block">
+                Quick Options
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/60 hover:bg-muted/60 transition-colors text-left"
+                >
+                  <div className="p-1.5 rounded-lg bg-muted text-foreground shrink-0">
+                    {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="text-xs font-bold text-foreground leading-tight">Theme</p>
+                    <p className="text-[10px] text-muted-foreground capitalize leading-tight mt-0.5">{theme} Mode</p>
+                  </div>
+                </button>
+
+                {/* Compare */}
+                <Link
+                  to="/shop"
+                  state={{ openCompare: true }}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/60 hover:bg-muted/60 transition-colors relative text-left"
+                >
+                  <div className="p-1.5 rounded-lg bg-muted text-foreground shrink-0 relative">
+                    <GitCompare className="h-4 w-4" />
+                    {compareList.length > 0 && (
+                      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground">
+                        {compareList.length}
+                      </span>
+                    )}
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="text-xs font-bold text-foreground leading-tight">Compare</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{compareList.length} items</p>
+                  </div>
+                </Link>
+
+                {/* Wishlist */}
+                <Link
+                  to="/wishlist"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/60 hover:bg-muted/60 transition-colors relative text-left"
+                >
+                  <div className="p-1.5 rounded-lg bg-muted text-red-500 shrink-0 relative">
+                    <Heart className="h-4 w-4" />
+                    {wishlist.length > 0 && (
+                      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white">
+                        {wishlist.length}
+                      </span>
+                    )}
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="text-xs font-bold text-foreground leading-tight">Wishlist</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">{wishlist.length} saved</p>
+                  </div>
+                </Link>
+
+                {/* Cart */}
+                <Link
+                  to="/cart"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 p-2 rounded-xl bg-background border border-border/60 hover:bg-muted/60 transition-colors relative text-left"
+                >
+                  <div className="p-1.5 rounded-lg bg-muted text-primary shrink-0 relative">
+                    <ShoppingCart className="h-4 w-4" />
+                    {cart.length > 0 && (
+                      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground">
+                        {cart.reduce((sum, item) => sum + item.quantity, 0)}
+                      </span>
+                    )}
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="text-xs font-bold text-foreground leading-tight">Cart</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">
+                      {cart.reduce((sum, item) => sum + item.quantity, 0)} items
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
             {/* Navigation links */}
-            <div className="mt-6 flex-1 flex flex-col space-y-4 overflow-y-auto pr-1">
-              <Link to="/" onClick={() => setMobileOpen(false)} className="text-sm font-bold text-foreground hover:text-primary">Home</Link>
-              <Link to="/shop" onClick={() => setMobileOpen(false)} className="text-sm font-bold text-foreground hover:text-primary">Shop</Link>
+            <div className="mt-4 flex-1 flex flex-col space-y-3.5 overflow-y-auto pr-1">
+              <Link to="/" onClick={() => setMobileOpen(false)} className="text-sm font-bold text-foreground hover:text-primary transition-colors">Home</Link>
+              <Link to="/shop" onClick={() => setMobileOpen(false)} className="text-sm font-bold text-foreground hover:text-primary transition-colors">Shop</Link>
               
               {/* Mobile Categories Accordion */}
               <div className="border-t pt-3">
                 <button
                   onClick={() => setMobileCategoriesOpen(!mobileCategoriesOpen)}
-                  className="flex items-center justify-between w-full text-xs font-black text-muted-foreground uppercase py-2 focus:outline-none"
+                  className="flex items-center justify-between w-full text-xs font-black text-muted-foreground uppercase py-1.5 focus:outline-none"
                 >
                   <span>Categories</span>
                   <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", mobileCategoriesOpen && "rotate-180")} />
@@ -733,7 +972,7 @@ export const Navbar: React.FC = () => {
               <div className="border-t pt-3">
                 <button
                   onClick={() => setMobileDealsOpen(!mobileDealsOpen)}
-                  className="flex items-center justify-between w-full text-xs font-black text-muted-foreground uppercase py-2 focus:outline-none"
+                  className="flex items-center justify-between w-full text-xs font-black text-muted-foreground uppercase py-1.5 focus:outline-none"
                 >
                   <span>Deals</span>
                   <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", mobileDealsOpen && "rotate-180")} />
@@ -759,7 +998,7 @@ export const Navbar: React.FC = () => {
               <div className="border-t pt-3">
                 <button
                   onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                  className="flex items-center justify-between w-full text-xs font-black text-muted-foreground uppercase py-2 focus:outline-none"
+                  className="flex items-center justify-between w-full text-xs font-black text-muted-foreground uppercase py-1.5 focus:outline-none"
                 >
                   <span>About</span>
                   <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", mobileAboutOpen && "rotate-180")} />
@@ -782,18 +1021,37 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
 
-            <div className="border-t pt-4">
+            {/* User Profile / Auth in Drawer */}
+            <div className="border-t pt-3.5 mt-auto">
               {isAuthenticated ? (
-                <div className="flex items-center gap-3">
-                  {user?.profilePic && <img src={user.profilePic} alt={user.name} className="h-8 w-8 rounded-full object-cover border" />}
-                  <div>
-                    <p className="text-xs font-semibold text-foreground">{user?.name}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5 overflow-hidden">
+                    {user?.profilePic ? (
+                      <img src={user.profilePic} alt={user.name} className="h-8 w-8 rounded-full object-cover border shrink-0" />
+                    ) : (
+                      <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center shrink-0">
+                        <User className="h-4 w-4" />
+                      </div>
+                    )}
+                    <div className="overflow-hidden">
+                      <p className="text-xs font-semibold text-foreground truncate">{user?.name}</p>
+                      <p className="text-[10px] text-muted-foreground truncate">{user?.email}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setMobileOpen(false)}
+                      className="text-xs font-semibold text-primary hover:underline px-2 py-1"
+                    >
+                      Dashboard
+                    </Link>
                     <button
                       onClick={() => {
                         logout()
                         setMobileOpen(false)
                       }}
-                      className="text-xs font-semibold text-red-500 hover:underline mt-0.5"
+                      className="text-xs font-semibold text-red-500 hover:underline px-2 py-1"
                     >
                       Sign Out
                     </button>
@@ -803,7 +1061,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   to="/login"
                   onClick={() => setMobileOpen(false)}
-                  className="w-full flex items-center justify-center h-10 rounded-lg bg-primary text-primary-foreground font-semibold text-sm"
+                  className="w-full flex items-center justify-center h-10 rounded-xl bg-primary text-primary-foreground font-semibold text-xs uppercase tracking-wider"
                 >
                   Sign In
                 </Link>

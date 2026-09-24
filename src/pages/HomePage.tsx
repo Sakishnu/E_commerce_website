@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { ArrowRight, Smartphone, Shirt, Home, Dumbbell, Star, ChevronLeft, ChevronRight, Eye } from "lucide-react"
+import { ArrowRight, Smartphone, Shirt, Home, Dumbbell, Star, ChevronLeft, ChevronRight, ChevronDown, Eye } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ProductCard } from "../components/product/ProductCard"
 import { QuickView } from "../components/product/QuickView"
@@ -78,35 +78,35 @@ export const HomePage: React.FC = () => {
     <div className="space-y-16 pb-16">
       
       {/* Hero Carousel Section */}
-      <section className="relative h-[400px] sm:h-[450px] lg:h-[500px] w-full overflow-hidden bg-muted">
-        <AnimatePresence mode="wait">
+      <section className="relative h-[460px] sm:h-[480px] lg:h-[520px] w-full overflow-hidden bg-zinc-950">
+        <AnimatePresence initial={false}>
           <motion.div
             key={activeSlide}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${HERO_SLIDES[activeSlide].image})` }}
           >
             {/* Background Dark Overlay & Centered Content */}
-            <div className="absolute inset-0 bg-black/70 flex items-center pt-12 sm:pt-16 lg:pt-20">
-              <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-                <div className="max-w-xl space-y-5 sm:space-y-6 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/40 flex items-center pt-8 pb-16 sm:py-16 lg:py-20">
+              <div className="relative mx-auto max-w-7xl px-12 sm:px-16 lg:px-20 w-full">
+                <div className="max-w-xl space-y-4 sm:space-y-6 text-white">
                   <div>
                     <span className="inline-block text-xs font-bold bg-primary text-primary-foreground px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-none border-0 outline-none">
                       {HERO_SLIDES[activeSlide].tag}
                     </span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-normal leading-tight text-white border-0 outline-none">
+                  <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-normal leading-tight text-white border-0 outline-none">
                     {HERO_SLIDES[activeSlide].title}
                   </h1>
-                  <p className="text-sm sm:text-base text-zinc-200 leading-relaxed border-0 outline-none">
+                  <p className="text-xs sm:text-base text-zinc-200 leading-relaxed border-0 outline-none line-clamp-2 sm:line-clamp-none">
                     {HERO_SLIDES[activeSlide].subtitle}
                   </p>
-                  <div className="pt-3 sm:pt-4">
+                  <div className="pt-2 sm:pt-4">
                     <Link to={HERO_SLIDES[activeSlide].link}>
-                      <Button size="lg" className="font-bold text-xs uppercase tracking-wider gap-2">
+                      <Button size="lg" className="font-bold text-xs uppercase tracking-wider gap-2 shadow-lg">
                         {HERO_SLIDES[activeSlide].cta}
                         <ArrowRight className="h-4 w-4" />
                       </Button>
@@ -121,33 +121,39 @@ export const HomePage: React.FC = () => {
         {/* Carousel Slide Left/Right Controls */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full bg-white/20 text-white backdrop-blur hover:bg-white/35 transition-colors"
+          className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 h-9 w-9 sm:h-11 sm:w-11 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur border border-white/10 hover:bg-black/60 transition-all z-20 cursor-pointer"
+          aria-label="Previous Slide"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full bg-white/20 text-white backdrop-blur hover:bg-white/35 transition-colors"
+          className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 h-9 w-9 sm:h-11 sm:w-11 flex items-center justify-center rounded-full bg-black/40 text-white backdrop-blur border border-white/10 hover:bg-black/60 transition-all z-20 cursor-pointer"
+          aria-label="Next Slide"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
 
-        {/* Carousel Indicators dots */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+        {/* Carousel Indicators dots & Bottom Arrow Navigation */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-2 z-20 bg-black/40 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/10 shadow-lg">
           {HERO_SLIDES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveSlide(idx)}
-              className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                activeSlide === idx ? "bg-primary" : "bg-white/40"
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                activeSlide === idx ? "w-6 bg-primary" : "w-2 bg-white/40 hover:bg-white/70"
               }`}
+              aria-label={`Slide ${idx + 1}`}
             />
           ))}
         </div>
+
+        {/* Bottom smooth fade to content */}
+        <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-background/20 to-transparent pointer-events-none z-10" />
       </section>
 
       {/* Category Grid Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
+      <section id="categories" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
         <h2 className="text-xl sm:text-2xl font-black text-foreground">Explore Categories</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {MOCK_CATEGORIES.map((cat) => (
