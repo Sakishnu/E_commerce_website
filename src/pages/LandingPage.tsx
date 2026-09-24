@@ -107,10 +107,10 @@ export const LandingPage: React.FC = () => {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 text-white space-y-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Electronics</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400">Electronics</span>
               <h3 className="font-bold text-base">Apex Smart Watches</h3>
               <p className="text-[11px] text-zinc-300">Modern fitness trackers and screen AMOLED displays.</p>
-              <Link to="/category/electronics" className="text-xs font-semibold text-primary underline-offset-4 hover:underline mt-2">
+              <Link to="/category/electronics" className="text-xs font-semibold text-blue-300 hover:text-white underline-offset-4 hover:underline mt-2">
                 Shop Collection &rarr;
               </Link>
             </div>
@@ -123,10 +123,10 @@ export const LandingPage: React.FC = () => {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 text-white space-y-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Apparel</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">Apparel</span>
               <h3 className="font-bold text-base">Leather & Outerwear</h3>
               <p className="text-[11px] text-zinc-300">Handcrafted full-grain leather apparel collections.</p>
-              <Link to="/category/fashion" className="text-xs font-semibold text-primary underline-offset-4 hover:underline mt-2">
+              <Link to="/category/fashion" className="text-xs font-semibold text-purple-300 hover:text-white underline-offset-4 hover:underline mt-2">
                 Shop Collection &rarr;
               </Link>
             </div>
@@ -139,10 +139,10 @@ export const LandingPage: React.FC = () => {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 text-white space-y-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Decor</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Decor</span>
               <h3 className="font-bold text-base">Minimalist Home Essentials</h3>
               <p className="text-[11px] text-zinc-300">Stoneware ceramics and energy-saving desk lights.</p>
-              <Link to="/category/home-living" className="text-xs font-semibold text-primary underline-offset-4 hover:underline mt-2">
+              <Link to="/category/home-living" className="text-xs font-semibold text-amber-300 hover:text-white underline-offset-4 hover:underline mt-2">
                 Shop Collection &rarr;
               </Link>
             </div>

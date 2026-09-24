@@ -267,79 +267,79 @@ export const Navbar: React.FC = () => {
   }, [])
 
   const dealsMenuItems = [
-    { name: "Today's Deals", desc: "Top discounts of the day", hash: "#todays-deals", icon: <Flame className="h-4.5 w-4.5 text-red-500 shrink-0" /> },
-    { name: "Flash Sales", desc: "Hurry, timer is running!", hash: "#flash-sales", icon: <Zap className="h-4.5 w-4.5 text-amber-500 fill-amber-500 shrink-0" /> },
-    { name: "Limited Time Offers", desc: "Exclusive selected promos", hash: "#limited-offers", icon: <Sparkles className="h-4.5 w-4.5 text-primary shrink-0" /> },
-    { name: "Clearance Sale", desc: "Up to 70% reduction", hash: "#clearance-sale", icon: <Tag className="h-4.5 w-4.5 text-rose-500 shrink-0" /> },
-    { name: "Buy One Get One", desc: "Two items for one price", hash: "#bogo", icon: <ShoppingBag className="h-4.5 w-4.5 text-emerald-500 shrink-0" /> },
-    { name: "Under ₹499", desc: "Best value budget picks", hash: "#under-499", icon: <Percent className="h-4.5 w-4.5 text-blue-500 shrink-0" /> },
-    { name: "Under ₹999", desc: "Selected mid-range items", hash: "#under-999", icon: <Laptop className="h-4.5 w-4.5 text-indigo-500 shrink-0" /> },
+    { name: "Today's Deals", desc: "Top discounts of the day", hash: "#todays-deals", icon: <Flame className="h-4.5 w-4.5 text-red-600 dark:text-red-400 shrink-0" /> },
+    { name: "Flash Sales", desc: "Hurry, timer is running!", hash: "#flash-sales", icon: <Zap className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400 fill-amber-500 dark:fill-amber-400 shrink-0" /> },
+    { name: "Limited Time Offers", desc: "Exclusive selected promos", hash: "#limited-offers", icon: <Sparkles className="h-4.5 w-4.5 text-purple-600 dark:text-purple-400 shrink-0" /> },
+    { name: "Clearance Sale", desc: "Up to 70% reduction", hash: "#clearance-sale", icon: <Tag className="h-4.5 w-4.5 text-rose-600 dark:text-rose-400 shrink-0" /> },
+    { name: "Buy One Get One", desc: "Two items for one price", hash: "#bogo", icon: <ShoppingBag className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400 shrink-0" /> },
+    { name: "Under ₹499", desc: "Best value budget picks", hash: "#under-499", icon: <Percent className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400 shrink-0" /> },
+    { name: "Under ₹999", desc: "Selected mid-range items", hash: "#under-999", icon: <Laptop className="h-4.5 w-4.5 text-indigo-600 dark:text-indigo-400 shrink-0" /> },
   ]
 
   const aboutMenuItems = [
-    { name: "Corporate Profile", desc: "Identity, culture, and high-impact offerings", hash: "#about-us", path: "/about", icon: <Users className="h-4.5 w-4.5 text-primary shrink-0" /> },
-    { name: "Our History", desc: "Tracing our origin and growth journey", hash: "#story", path: "/about", icon: <BookOpen className="h-4.5 w-4.5 text-blue-500 shrink-0" /> },
-    { name: "Core Principles", desc: "Empowering daily life through curation", hash: "#mission", path: "/about", icon: <Compass className="h-4.5 w-4.5 text-emerald-500 shrink-0" /> },
-    { name: "Our Advantage", desc: "Uncompromising quality & verified standards", hash: "#why-choose-us", path: "/about", icon: <Award className="h-4.5 w-4.5 text-amber-500 shrink-0" /> },
-    { name: "Get In Touch", desc: "Connect directly with global assistance", path: "/contact", icon: <Phone className="h-4.5 w-4.5 text-rose-500 shrink-0" /> },
-    { name: "Help Center", desc: "Instant clarity on common inquiries", path: "/faq", icon: <Sparkles className="h-4.5 w-4.5 text-violet-500 shrink-0" /> },
-    { name: "Data Protection", desc: "Robust safeguards ensuring confidentiality", hash: "#privacy", path: "/about", icon: <ShieldCheck className="h-4.5 w-4.5 text-teal-500 shrink-0" /> },
-    { name: "Service Terms", desc: "Clear governing guidelines & standards", hash: "#terms", path: "/about", icon: <FileText className="h-4.5 w-4.5 text-zinc-500 shrink-0" /> },
+    { name: "Corporate Profile", desc: "Identity, culture, and high-impact offerings", hash: "#about-us", path: "/about", icon: <Users className="h-4.5 w-4.5 text-indigo-600 dark:text-indigo-400 shrink-0" /> },
+    { name: "Our History", desc: "Tracing our origin and growth journey", hash: "#story", path: "/about", icon: <BookOpen className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400 shrink-0" /> },
+    { name: "Core Principles", desc: "Empowering daily life through curation", hash: "#mission", path: "/about", icon: <Compass className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400 shrink-0" /> },
+    { name: "Our Advantage", desc: "Uncompromising quality & verified standards", hash: "#why-choose-us", path: "/about", icon: <Award className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400 shrink-0" /> },
+    { name: "Get In Touch", desc: "Connect directly with global assistance", path: "/contact", icon: <Phone className="h-4.5 w-4.5 text-rose-600 dark:text-rose-400 shrink-0" /> },
+    { name: "Help Center", desc: "Instant clarity on common inquiries", path: "/faq", icon: <Sparkles className="h-4.5 w-4.5 text-violet-600 dark:text-violet-400 shrink-0" /> },
+    { name: "Data Protection", desc: "Robust safeguards ensuring confidentiality", hash: "#privacy", path: "/about", icon: <ShieldCheck className="h-4.5 w-4.5 text-teal-600 dark:text-teal-400 shrink-0" /> },
+    { name: "Service Terms", desc: "Clear governing guidelines & standards", hash: "#terms", path: "/about", icon: <FileText className="h-4.5 w-4.5 text-slate-600 dark:text-slate-400 shrink-0" /> },
   ]
 
   const categories = [
     {
       name: "Electronics",
       slug: "electronics",
-      icon: <Laptop className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Laptop className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400 shrink-0" />,
       items: ["Smartphones", "Laptops", "Accessories", "Smart Devices"],
     },
     {
       name: "Fashion",
       slug: "fashion",
-      icon: <Shirt className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Shirt className="h-4.5 w-4.5 text-purple-600 dark:text-purple-400 shrink-0" />,
       items: ["Men", "Women", "Kids", "Footwear"],
     },
     {
       name: "Home & Living",
       slug: "home-living",
-      icon: <Home className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Home className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400 shrink-0" />,
       items: ["Furniture", "Home Decor", "Kitchen", "Lighting"],
     },
     {
       name: "Sports & Fitness",
       slug: "sports-fitness",
-      icon: <Dumbbell className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Dumbbell className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400 shrink-0" />,
       items: ["Gym Equipment", "Sports Gear", "Outdoor Activities", "Fitness Accessories"],
     },
     {
       name: "Beauty & Personal Care",
       slug: "beauty-personal-care",
-      icon: <Sparkles className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Sparkles className="h-4.5 w-4.5 text-pink-600 dark:text-pink-400 shrink-0" />,
       items: ["Skincare", "Hair Care", "Makeup", "Grooming"],
     },
     {
       name: "Books & Stationery",
       slug: "books-stationery",
-      icon: <BookOpen className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <BookOpen className="h-4.5 w-4.5 text-red-600 dark:text-red-400 shrink-0" />,
       items: ["Books", "Notebooks", "Office Supplies", "Study Materials"],
     },
     {
       name: "Toys & Games",
       slug: "toys-games",
-      icon: <Gamepad className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Gamepad className="h-4.5 w-4.5 text-teal-600 dark:text-teal-400 shrink-0" />,
       items: ["Educational Toys", "Board Games", "Kids Toys", "Puzzles"],
     },
     {
       name: "Automotive",
       slug: "automotive",
-      icon: <Car className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <Car className="h-4.5 w-4.5 text-slate-600 dark:text-slate-400 shrink-0" />,
       items: ["Car Accessories", "Bike Accessories", "Helmets", "Vehicle Care"],
     },
     {
       name: "Health & Wellness",
       slug: "health-wellness",
-      icon: <HeartPulse className="h-4.5 w-4.5 text-primary shrink-0" />,
+      icon: <HeartPulse className="h-4.5 w-4.5 text-rose-600 dark:text-rose-400 shrink-0" />,
       items: ["Fitness Equipment", "Yoga Accessories", "Health Devices", "Nutrition Products"],
     },
   ]
@@ -429,7 +429,7 @@ export const Navbar: React.FC = () => {
                 ref={dealsDropdownRef}
                 onMouseEnter={handleOpenDeals}
                 onMouseLeave={handleCloseDeals}
-                className="absolute left-0 top-full mt-0 w-72 rounded-2xl border bg-background bg-white dark:bg-zinc-950 p-3 shadow-2xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 before:absolute before:bottom-full before:left-0 before:right-0 before:h-4 before:content-['']"
+                className="absolute left-0 top-full mt-0 w-72 rounded-2xl border bg-background p-3 shadow-2xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 before:absolute before:bottom-full before:left-0 before:right-0 before:h-4 before:content-['']"
               >
                 <div className="space-y-1">
                   {dealsMenuItems.map((item) => (
@@ -437,9 +437,9 @@ export const Navbar: React.FC = () => {
                       key={item.name}
                       to={`/deals${item.hash}`}
                       onClick={() => setShowDeals(false)}
-                      className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-colors group"
+                      className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/60 transition-colors group"
                     >
-                      <div className="p-2 bg-muted/60 group-hover:bg-background rounded-lg text-muted-foreground group-hover:text-primary transition-colors shrink-0">
+                      <div className="p-2 bg-muted/80 group-hover:bg-background rounded-lg border border-border/40 transition-colors shrink-0">
                         {item.icon}
                       </div>
                       <div className="overflow-hidden">
@@ -471,7 +471,7 @@ export const Navbar: React.FC = () => {
                 ref={aboutDropdownRef}
                 onMouseEnter={handleOpenAbout}
                 onMouseLeave={handleCloseAbout}
-                className="absolute left-0 top-full mt-0 w-80 rounded-2xl border bg-background bg-white dark:bg-zinc-950 p-3 shadow-2xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 before:absolute before:bottom-full before:left-0 before:right-0 before:h-4 before:content-['']"
+                className="absolute left-0 top-full mt-0 w-80 rounded-2xl border bg-background p-3 shadow-2xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 before:absolute before:bottom-full before:left-0 before:right-0 before:h-4 before:content-['']"
               >
                 <div className="grid grid-cols-1 gap-1">
                   {aboutMenuItems.map((item) => (
@@ -479,9 +479,9 @@ export const Navbar: React.FC = () => {
                       key={item.name}
                       to={item.path + (item.hash || "")}
                       onClick={() => setShowAbout(false)}
-                      className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-colors group"
+                      className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/60 transition-colors group"
                     >
-                      <div className="p-2 bg-muted/60 group-hover:bg-background rounded-lg text-muted-foreground group-hover:text-primary transition-colors shrink-0">
+                      <div className="p-2 bg-muted/80 group-hover:bg-background rounded-lg border border-border/40 transition-colors shrink-0">
                         {item.icon}
                       </div>
                       <div className="overflow-hidden">
@@ -519,7 +519,7 @@ export const Navbar: React.FC = () => {
           </form>
 
           {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-background bg-white dark:bg-zinc-950 border rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in-50 duration-100">
+            <div className="absolute top-full left-0 right-0 mt-2 bg-background border rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in-50 duration-100">
               <div className="p-2 border-b">
                 <span className="text-[10px] font-semibold text-muted-foreground uppercase px-2">Suggestions</span>
               </div>
@@ -624,7 +624,7 @@ export const Navbar: React.FC = () => {
                   ref={userDropdownRef}
                   onMouseEnter={handleOpenUserMenu}
                   onMouseLeave={handleCloseUserMenu}
-                  className="absolute right-0 top-full mt-2 w-44 rounded-xl border bg-background bg-white dark:bg-zinc-950 p-1.5 shadow-xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 space-y-1"
+                  className="absolute right-0 top-full mt-2 w-44 rounded-xl border bg-background p-1.5 shadow-xl z-50 animate-in fade-in-50 slide-in-from-top-2 duration-150 space-y-1"
                 >
                   <Link
                     to="/dashboard"
@@ -671,7 +671,7 @@ export const Navbar: React.FC = () => {
       {/* Mobile Drawer Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden bg-black/60 backdrop-blur-sm animate-in fade-in-30">
-          <div className="relative flex w-full max-w-xs flex-col h-full bg-background bg-white dark:bg-[#090b11] p-6 shadow-xl animate-in slide-in-from-right-5 duration-200 ml-auto">
+          <div className="relative flex w-full max-w-xs flex-col h-full bg-background p-6 shadow-xl animate-in slide-in-from-right-5 duration-200 ml-auto">
             <div className="flex items-center justify-between border-b pb-4">
               <span className="text-sm font-bold text-foreground">Menu</span>
               <button

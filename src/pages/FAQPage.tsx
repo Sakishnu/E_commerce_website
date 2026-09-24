@@ -1,15 +1,14 @@
 import React from "react"
 import { HelpCircle } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/Accordion"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 
 export const FAQPage: React.FC = () => {
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" defaultPath="/" />
-      
-      <Breadcrumbs items={[{ label: "Help Center" }]} />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/" />
+      </div>
 
       <div className="border-b pb-4 mb-8">
         <h1 className="text-xl sm:text-2xl font-black text-foreground">Help Center</h1>

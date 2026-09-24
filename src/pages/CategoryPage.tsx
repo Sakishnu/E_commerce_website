@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import { SlidersHorizontal, ArrowRight, Layers } from "lucide-react"
 import { ProductCard } from "../components/product/ProductCard"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { Button } from "../components/ui/Button"
 import { api } from "../services/api"
 import { Product } from "../types"
@@ -155,15 +154,9 @@ export const CategoryPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" />
-      
-      {/* Breadcrumb navigation */}
-      <Breadcrumbs
-        items={[
-          { label: "Shop", path: "/shop" },
-          { label: categoryDetails.name },
-        ]}
-      />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/shop" />
+      </div>
 
       {/* Category Hero Banner */}
       <div
@@ -172,7 +165,7 @@ export const CategoryPage: React.FC = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/25" />
         <div className="relative max-w-2xl text-white space-y-4">
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-primary/95 text-white px-3 py-1 rounded-full uppercase tracking-wider">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-primary text-primary-foreground px-3 py-1 rounded-full uppercase tracking-wider">
             <Layers className="h-3 w-3" />
             Category Collection
           </span>
@@ -209,13 +202,13 @@ export const CategoryPage: React.FC = () => {
                 
                 {/* Text Content */}
                 <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end">
-                  <h3 className="text-base sm:text-lg font-black text-white group-hover:text-primary transition-colors flex items-center gap-1">
+                  <h3 className="text-base sm:text-lg font-black text-white group-hover:text-blue-300 transition-colors flex items-center gap-1">
                     {sub.name}
                   </h3>
                   <p className="text-[11px] text-zinc-300 line-clamp-2 mt-1 leading-snug font-medium">
                     {sub.desc}
                   </p>
-                  <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-white bg-primary px-3 py-1.5 rounded-lg w-fit opacity-90 group-hover:opacity-100 transition-opacity">
+                  <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground px-3 py-1.5 rounded-lg w-fit opacity-90 group-hover:opacity-100 transition-opacity">
                     Explore items
                     <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
                   </div>

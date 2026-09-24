@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Tag, Clock, Check, Copy, Flame, Percent, ShieldCheck, Zap, Sparkles, ShoppingBag } from "lucide-react"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 import { Button } from "../components/ui/Button"
 import { ProductCard } from "../components/product/ProductCard"
@@ -95,8 +94,9 @@ export const DealsPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" defaultPath="/" />
-      <Breadcrumbs items={[{ label: "Deals & Promotions" }]} />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/" />
+      </div>
 
       {/* Featured Offer Banner */}
       <section id="todays-deals" className="relative h-64 sm:h-96 w-full rounded-3xl overflow-hidden bg-muted flex items-center p-6 sm:p-12 mb-12 shadow-md border bg-cover bg-center mt-4 scroll-mt-24"

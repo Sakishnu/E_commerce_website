@@ -24,11 +24,11 @@ export const BackButton: React.FC<BackButtonProps> = ({ defaultPath = "/", class
     <Button
       variant="outline"
       size="sm"
-      className={`inline-flex items-center gap-1.5 h-8 text-xs font-semibold px-3 rounded-lg border border-input text-muted-foreground hover:text-foreground hover:bg-muted/50 bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 shrink-0 ${className}`}
+      className={`inline-flex items-center gap-2 h-9 text-xs font-semibold px-3.5 rounded-xl border border-input text-muted-foreground hover:text-foreground hover:bg-muted/50 bg-background shadow-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 shrink-0 ${className}`}
       onClick={handleBack}
       title="Go Back"
     >
-      <ArrowLeft className="h-3.5 w-3.5" />
+      <ArrowLeft className="h-4 w-4" />
       Back
     </Button>
   )

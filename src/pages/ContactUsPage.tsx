@@ -3,7 +3,6 @@ import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
 import { useNotification } from "../context/NotificationContext"
 import { Button } from "../components/ui/Button"
 import { Input } from "../components/ui/Input"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 
 export const ContactUsPage: React.FC = () => {
@@ -31,9 +30,9 @@ export const ContactUsPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" defaultPath="/" />
-      
-      <Breadcrumbs items={[{ label: "Get In Touch" }]} />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/" />
+      </div>
 
       <div className="border-b pb-4 mb-8">
         <h1 className="text-xl sm:text-2xl font-black text-foreground">Get In Touch</h1>

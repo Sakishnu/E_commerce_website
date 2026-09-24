@@ -17,7 +17,6 @@ import {
   ChevronUp, 
   FileText 
 } from "lucide-react"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 
 export const AboutUsPage: React.FC = () => {
@@ -56,8 +55,9 @@ export const AboutUsPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
-      <BackButton className="mb-4" defaultPath="/" />
-      <Breadcrumbs items={[{ label: "About Us" }]} />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/" />
+      </div>
 
       {/* Hero Header Section - Company Introduction */}
       <section 

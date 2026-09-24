@@ -6,7 +6,6 @@ import { useUserStore } from "../store/userStore"
 import { useNotification } from "../context/NotificationContext"
 import { Button } from "../components/ui/Button"
 import { Input } from "../components/ui/Input"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 import { api } from "../services/api"
 import { Address } from "../types"
@@ -107,9 +106,9 @@ export const CheckoutPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" defaultPath="/cart" />
-      
-      <Breadcrumbs items={[{ label: "Cart", path: "/cart" }, { label: "Checkout" }]} />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/cart" />
+      </div>
 
       <div className="border-b pb-4 mb-8">
         <h1 className="text-xl sm:text-2xl font-black text-foreground">Secure Checkout</h1>

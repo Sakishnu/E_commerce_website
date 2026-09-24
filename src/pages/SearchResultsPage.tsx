@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useSearchParams, Link } from "react-router-dom"
 import { Search, ShoppingBag } from "lucide-react"
 import { ProductCard } from "../components/product/ProductCard"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { Button } from "../components/ui/Button"
 import { api, MOCK_PRODUCTS } from "../services/api"
 import { Product } from "../types"
@@ -40,16 +39,11 @@ export const SearchResultsPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" />
-      
-      <Breadcrumbs
-        items={[
-          { label: "Search", path: "/shop" },
-          { label: `"${query}"` },
-        ]}
-      />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/shop" />
+      </div>
 
-      <div className="space-y-6 mt-4">
+      <div className="space-y-6 mt-2">
         
         {/* Results Header */}
         <div className="border-b pb-4">

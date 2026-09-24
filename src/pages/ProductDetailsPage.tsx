@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom"
 import { ShoppingCart, Heart, Plus, Minus, Star, MessageSquare, ShieldCheck, RefreshCcw, Send } from "lucide-react"
 import { ProductZoom } from "../components/product/ProductZoom"
 import { ProductCard } from "../components/product/ProductCard"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/Tabs"
 import { Button } from "../components/ui/Button"
 import { Input } from "../components/ui/Input"
@@ -134,18 +133,11 @@ export const ProductDetailsPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" />
-      
-      {/* Dynamic Breadcrumbs */}
-      <Breadcrumbs
-        items={[
-          { label: "Shop", path: "/shop" },
-          { label: product.category, path: `/category/${product.category}` },
-          { label: product.name },
-        ]}
-      />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/shop" />
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mt-2">
         
         {/* Left Column: Image Zoom Gallery */}
         <div className="space-y-4">

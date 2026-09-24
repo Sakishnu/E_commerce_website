@@ -5,7 +5,6 @@ import { ProductFilters, FiltersState } from "../components/product/ProductFilte
 import { ProductCard } from "../components/product/ProductCard"
 import { QuickView } from "../components/product/QuickView"
 import { CompareModal } from "../components/product/CompareModal"
-import { Breadcrumbs } from "../components/common/Breadcrumbs"
 import { BackButton } from "../components/common/BackButton"
 import { Button } from "../components/ui/Button"
 import { Select } from "../components/ui/Select"
@@ -118,35 +117,12 @@ export const ProductListingPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
-      <BackButton className="mb-4" />
-      
-      {/* Breadcrumb path */}
-      <Breadcrumbs items={
-        (() => {
-          const formatLabel = (str: string) => {
-            return str.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ")
-          }
-          const items: { label: string; path?: string }[] = [{ label: "Shop", path: "/shop" }]
-          if (slug) {
-            items.push({
-              label: formatLabel(slug),
-              path: subSlug ? `/category/${slug}` : undefined
-            })
-          }
-          if (subSlug) {
-            items.push({
-              label: formatLabel(subSlug)
-            })
-          }
-          if (!slug && !subSlug) {
-            return [{ label: "Shop All" }]
-          }
-          return items
-        })()
-      } />
+      <div className="pt-6 pb-4 flex items-center">
+        <BackButton defaultPath="/shop" />
+      </div>
 
       {/* Grid listing content */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-2">
         
         {/* Sidebar filters (Desktop only) */}
         <aside className="hidden lg:block border p-6 rounded-2xl bg-card shadow-sm h-fit">

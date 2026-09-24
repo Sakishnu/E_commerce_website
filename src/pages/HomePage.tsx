@@ -92,17 +92,19 @@ export const HomePage: React.FC = () => {
             {/* Background Dark Overlay & Centered Content */}
             <div className="absolute inset-0 bg-black/70 flex items-center pt-12 sm:pt-16 lg:pt-20">
               <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-                <div className="max-w-xl space-y-4 text-white">
-                  <span className="text-xs font-bold bg-primary text-primary-foreground px-3 py-1 rounded-full uppercase tracking-wider">
-                    {HERO_SLIDES[activeSlide].tag}
-                  </span>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-none">
+                <div className="max-w-xl space-y-5 sm:space-y-6 text-white">
+                  <div>
+                    <span className="inline-block text-xs font-bold bg-primary text-primary-foreground px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-none border-0 outline-none">
+                      {HERO_SLIDES[activeSlide].tag}
+                    </span>
+                  </div>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-normal leading-tight text-white border-0 outline-none">
                     {HERO_SLIDES[activeSlide].title}
                   </h1>
-                  <p className="text-sm sm:text-base text-zinc-200">
+                  <p className="text-sm sm:text-base text-zinc-200 leading-relaxed border-0 outline-none">
                     {HERO_SLIDES[activeSlide].subtitle}
                   </p>
-                  <div className="pt-6 sm:pt-8">
+                  <div className="pt-3 sm:pt-4">
                     <Link to={HERO_SLIDES[activeSlide].link}>
                       <Button size="lg" className="font-bold text-xs uppercase tracking-wider gap-2">
                         {HERO_SLIDES[activeSlide].cta}
